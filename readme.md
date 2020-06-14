@@ -1,7 +1,7 @@
 # Личный проект «Типотека» [![Build status][travis-image]][travis-url]
 
 * Студент: [Дмитрий Спирин](https://up.htmlacademy.ru/nodejs/3/user/841249).
-* Наставник: `Неизвестно`.
+* Наставник: [Евгений Морозов](https://htmlacademy.ru/profile/id668345).
 
 ---
 
