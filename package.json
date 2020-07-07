@@ -22,9 +22,5 @@
   "bugs": {
     "url": "https://github.com/Stayrem/841249-typoteka-3/issues"
   },
-  "homepage": "https://github.com/Stayrem/841249-typoteka-3#readme",
-  "devDependencies": {
-    "eslint": "7.2.0",
-    "eslint-config-htmlacademy": "0.5.2"
-  }
+  "homepage": "https://github.com/Stayrem/841249-typoteka-3#readme"
 }
