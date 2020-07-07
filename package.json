@@ -1,11 +1,16 @@
 {
   "name": "841249-typoteka-3",
   "version": "1.0.0",
-  "description": "Куплю. Продам",
+  "description": "Типотека",
   "main": "./src/service/service.js",
+  "dependencies": {},
+  "devDependencies": {
+    "eslint": "7.3.0",
+    "eslint-config-htmlacademy": "^0.5.2"
+  },
   "scripts": {
     "test": "npm run eslint",
-    "eslint": "eslint --ext .js",
+    "eslint": "eslint --ext .js src/",
     "start": "node ./src/service/service.js"
   },
   "repository": {
@@ -22,4 +27,6 @@
     "eslint": "7.2.0",
     "eslint-config-htmlacademy": "0.5.2"
   }
+  "homepage": "https://github.com/Stayrem/841249-typoteka-3#readme"
+
 }
