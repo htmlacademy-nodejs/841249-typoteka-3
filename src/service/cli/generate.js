@@ -1,6 +1,5 @@
 'use strict';
-const fs = require(`fs`).promises;
-const chalk = require(`chalk`);
+const fs = require(`fs`);
 const {
   getRandomInt,
 } = require(`../../utils`);
@@ -99,15 +98,16 @@ const generateOffers = (count) => (
 
 module.exports = {
   name: `--generate`,
-  async run(args) {
+  run(args) {
     const [count] = args;
     const countOffer = Number.parseInt(count, 10) || DEFAULT_COUNT;
     const content = JSON.stringify(generateOffers(countOffer));
-    try {
-      await fs.writeFile(FILE_NAME, content);
-      return console.info(chalk.green(0));
-    } catch (err) {
-      return console.error(chalk.red(1));
-    }
+    fs.writeFile(FILE_NAME, content, (err) => {
+      if (err) {
+        return console.error(1);
+      }
+
+      return console.info(0);
+    });
   }
 };
