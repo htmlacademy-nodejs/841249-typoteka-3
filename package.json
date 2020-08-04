@@ -15,7 +15,7 @@
     "test": "npm run eslint",
     "eslint": "eslint --ext .js src/",
     "start": "node ./src/service/service.js",
-    "start.dev": "nodemon ./src/main.js --3000"
+    "server": "nodemon ./src/service/service.js --server 3000"
   },
   "repository": {
     "type": "git",

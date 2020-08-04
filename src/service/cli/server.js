@@ -19,14 +19,12 @@ const readJson = async (path) => {
   }
 };
 
-const createNode = async () => {
-  const content = await readJson(mockPath);
-  let titlesItems = ``;
-  content.forEach((item) => {
-    titlesItems += `<li>${item.title}</li>`;
-    return titlesItems;
+const createNode = (content) => {
+
+  const titlesItems = content.map((currentValue) => {
+    return `<li>${currentValue.title}</li>`;
   });
-  const titlesList = `<ul>${titlesItems}</ul>`;
+  const titlesList = `<ul>${titlesItems.join(``)}</ul>`;
   return titlesList;
 };
 
@@ -36,7 +34,7 @@ const onClientConnect = async (request, response) => {
     response.writeHead(HTTP_SUCCESS_CODE, {
       'Content-Type': `text/html; charset=UTF-8`,
     });
-    const node = await createNode();
+    const node = await createNode(parsedTitle);
     response.end(node);
   } else {
     response.writeHead(HTTP_ERROR_CODE, {
