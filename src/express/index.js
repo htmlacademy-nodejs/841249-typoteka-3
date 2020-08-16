@@ -11,6 +11,9 @@ const searchRouter = require(`./routes/search.js`);
 const app = express();
 const DEFAULT_PORT = 8000;
 
+app.set(`views`, `./templates`);
+app.set(`view engine`, `pug`);
+
 app.use(`/register`, registerRouter);
 app.use(`/login`, loginRouter);
 app.use(`/my`, myRouter);
