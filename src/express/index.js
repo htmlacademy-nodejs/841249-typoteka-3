@@ -1,5 +1,5 @@
 'use strict';
-
+const path = require(`path`);
 const express = require(`express`);
 const registerRouter = require(`./routes/register.js`);
 const loginRouter = require(`./routes/login.js`);
@@ -9,11 +9,14 @@ const categoriesRouter = require(`./routes/categories.js`);
 const searchRouter = require(`./routes/search.js`);
 
 const app = express();
-const DEFAULT_PORT = 8000;
-
-app.set(`views`, `./templates`);
+const DEFAULT_PORT = 8080;
+const templates = path.resolve(`./templates`);
+app.set(`views`, templates);
 app.set(`view engine`, `pug`);
 
+app.get(`/`, (req, res) => {
+  res.render(`main.pug`);
+});
 app.use(`/register`, registerRouter);
 app.use(`/login`, loginRouter);
 app.use(`/my`, myRouter);
