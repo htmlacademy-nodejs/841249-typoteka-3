@@ -1,0 +1,20 @@
+extends base.pug
+block content
+  include layouts/header
+  main.main-page.main-page--padding
+    section.main-page__notes.notes
+      h1.notes__title Мои записи
+      ul.notes__list
+        each val, index in publicationsList
+          if index + 1 >= publicationsList.length
+            li.notes__list-item.notes__list-item--last
+              time.notes__item-time(datetime=val.date.data)=val.date.text
+              a.notes__item-text(href=val.titleLink.href)=val.titleLink.text
+              button.notes__button.button.button--close-item(type='button')
+                span.visually-hidden Закрыть строку списка
+          else
+            li.notes__list-item
+              time.notes__item-time(datetime=val.date.data)=val.date.text
+              a.notes__item-text(href=val.titleLink.href)=val.titleLink.text
+              button.notes__button.button.button--close-item(type='button')
+                span.visually-hidden Закрыть строку списка
