@@ -5,7 +5,8 @@ const {Router} = require(`express`);
 
 const myRouter = new Router();
 
-myRouter.get(`/`, (req, res) => res.render(`my.pug`, mock.my));
-myRouter.get(`/comments`, (req, res) => res.render(`comments.pug`, mock.comments));
+myRouter.get(`/`, (req, res) => {
+  res.render(`post.pug`, mock.post);
+});
 
 module.exports = myRouter;

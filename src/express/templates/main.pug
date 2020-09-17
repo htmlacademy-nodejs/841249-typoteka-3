@@ -1,0 +1,75 @@
+extends base.pug
+block content
+  include layouts/header
+  main.main-page
+    h1.visually-hidden Главная страница личного блога Типотека
+    p
+      | Это приветственный текст, который владелец блога может выбрать, чтобы описать себя 👏
+    if articles.length <= 0
+      .main-page__empty-wrapper
+        p.main-page__empty-text Здесь пока пусто!
+    else
+      section.main-page__theme-list
+      h2.visually-hidden Список тем
+      ul.themes
+          each val in themes
+            li.themes__item
+              a.themes__item-link(href=val.href)=val.title
+                sup=val.sup
+      .main-page__section-flex
+      section.main-page__hot.hot
+        h2.hot__name
+          | Самое обсуждаемое
+          span.hot__icon.hot__icon--fire
+        if popular.length <= 0
+          p.hot__empty Здесь пока ничего нет ...
+        else
+          ul.hot__list
+            each val in popular
+              li.hot__list-item
+                a.hot__list-link(href=val.href)=val.text
+                  sup.hot__link-sup=val.sup
+      section.main-page__last.last
+        h2.last__name
+          | Последние комментарии
+          span.last__icon.last__icon--cloud
+        if lastComments.length <= 0
+          p.hot__empty Здесь пока ничего нет ...
+        else
+          ul.last__list
+            each val in lastComments
+              li.last__list-item
+                img.last__list-image(src=val.avatarSrc width="20" height="20" alt="Аватар пользователя")
+                b.last__list-name=val.name
+                a.last__list-link(href="#")=val.text
+      section.main-page__list.preview
+      h2.visually-hidden Список превью статей
+      ul.preview__list
+        each val in articles
+          if val.posterSrc
+            li.preview__item
+              ul.preview__breadcrumbs
+                each breadcrumb in val.breadcrumbs
+                  li.preview__breadcrumbs-item
+                    a.preview__breadcrumbs-link(href=breadcrumb.link)=breadcrumb.title
+              .preview__background
+                img.preview__background-image(src=val.posterSrc + '@1x.jpg' width="460" height="240" srcset=val.posterSrc + "@1x.jpg 1x," + val.posterSrc + "@2x.jpg 2x" alt="Фотография небоскреба")
+              time.preview__time(datetime=val.date.dateRaw)=val.date.dateText
+              h3.preview__name
+                a.preview__name-link(href="#")=val.title
+              p.preview__text=val.text
+              a.preview__comment(href="#")="Комментарии"
+                span.preview__cloud
+                b.preview__comment-count=val.commentsCount
+          else
+            li.preview__item.preview__item--noimage
+              ul.preview__breadcrumbs
+                li.preview__breadcrumbs-item
+                  a.preview__breadcrumbs-link(href="#") Фриланс
+              time.preview__time(datetime="2019-03-21T20:33") 21.03.2019, 20:33
+              h3.preview__name
+                a.preview__name-link(href="#")=val.title
+              p.preview__text=val.text
+              a.preview__comment(href="#")="Комментарии"
+                span.preview__cloud
+                b.preview__comment-count=val.commentsCount
