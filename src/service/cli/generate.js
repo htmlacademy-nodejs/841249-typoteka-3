@@ -1,17 +1,17 @@
 'use strict';
 const fs = require(`fs`).promises;
 const chalk = require(`chalk`);
+const {nanoid} = require(`nanoid`);
+const {shuffle} = require(`../../utils.js`);
+const {MAX_ID_LENGTH, FILES_PATHES} = require(`../../constants.js`);
+
 const {
   getRandomInt,
 } = require(`../../utils`);
 const DEFAULT_COUNT = 1;
 const FILE_NAME = `mock.json`;
+const MAX_COMMENTS = 4;
 
-const FILES_PATHES = {
-  titlesPath: `data/titles.txt`,
-  announcesPath: `data/sentences.txt`,
-  categoriesPath: `data/categories.txt`,
-};
 
 const readFiles = async (path) => {
   try {
@@ -52,13 +52,24 @@ const getText = (announces, maxLength = 5) => {
   return announce;
 };
 
-const generateOffers = (count, titles, categories, announces) => (
+const generateComments = (count, comments) => (
   Array(count).fill({}).map(() => ({
+    id: nanoid(MAX_ID_LENGTH),
+    text: shuffle(comments)
+      .slice(0, getRandomInt(1, 3))
+      .join(` `),
+  }))
+);
+
+const generateOffers = (count, titles, categories, announces, comments) => (
+  Array(count).fill({}).map(() => ({
+    id: nanoid(MAX_ID_LENGTH),
     title: titles[getRandomInt(0, titles.length)],
     createdDate: getRandomDate(),
     announce: getText(announces),
     fullText: getText(announces, announces.length),
-    сategory: categories[getRandomInt(0, categories.length - 1)],
+    category: categories[getRandomInt(0, categories.length - 1)],
+    comments: generateComments(getRandomInt(1, MAX_COMMENTS), comments),
   }))
 );
 
@@ -68,9 +79,10 @@ module.exports = {
     const titles = await readFiles(FILES_PATHES.titlesPath);
     const announces = await readFiles(FILES_PATHES.announcesPath);
     const categories = await readFiles(FILES_PATHES.categoriesPath);
+    const comments = await readFiles(FILES_PATHES.commentsPath);
     const [count] = args;
     const countOffer = Number.parseInt(count, 10) || DEFAULT_COUNT;
-    const content = JSON.stringify(generateOffers(countOffer, titles, categories, announces));
+    const content = JSON.stringify(generateOffers(countOffer, titles, categories, announces, comments));
     try {
       await fs.writeFile(FILE_NAME, content);
       return console.info(chalk.green(0));
