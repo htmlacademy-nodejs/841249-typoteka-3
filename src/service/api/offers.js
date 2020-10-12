@@ -40,7 +40,40 @@ module.exports.offers = (app, service) => {
         .json(comments);
   });
 
-  route.post(`/offers`, (req, res) => {
+  route.post(`/`, (req, res) => {
     const body = req.body;
+    const newOffers = service.addOffer(body);
+    res.status(HttpCode.OK)
+      .json(newOffers);
+  });
+
+  route.put(`/:offerId`, (req, res) => {
+    const {offerId} = req.params;
+    const body = req.body;
+    const newOffers = service.editOffer(offerId, body);
+    res.status(HttpCode.OK)
+      .json(newOffers);
+  });
+
+  route.delete(`/:offerId/comments/:commentId`, (req, res) => {
+    const {offerId, commentId} = req.params;
+    const newOffers = service.deleteComment(offerId, commentId);
+    res.status(HttpCode.OK)
+      .json(newOffers);
+  });
+
+  route.delete(`/:offerId`, (req, res) => {
+    const {offerId} = req.params;
+    const newOffers = service.deleteOffer(offerId);
+    res.status(HttpCode.OK)
+      .json(newOffers);
+  });
+
+  route.post(`/:offerId/comments`, (req, res) => {
+    const {offerId} = req.params;
+    const body = req.body;
+    const newOffers = service.addComment(offerId, body);
+    res.status(HttpCode.OK)
+      .json(newOffers);
   });
 };
