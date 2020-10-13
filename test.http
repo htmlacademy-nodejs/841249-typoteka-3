@@ -1,6 +1,6 @@
 
 #edit offer
-PUT  http://localhost:3000/api/offers/mRsziN HTTP/1.1
+PUT  http://localhost:3000/api/articles/mRsziN HTTP/1.1
 content-type: application/json
 
 {
@@ -10,15 +10,15 @@ content-type: application/json
 
 ###
 #delete offer
-DELETE  http://localhost:3000/api/offers/mRsziN HTTP/1.1
+DELETE  http://localhost:3000/api/articles/mRsziN HTTP/1.1
 
 ###
 #delete comment
-DELETE  http://localhost:3000/api/offers/mRsziN/comments/WGYJ1b HTTP/1.1
+DELETE  http://localhost:3000/api/articles/mRsziN/comments/WGYJ1b HTTP/1.1
 
 ###
 #add comment
-POST  http://localhost:3000/api/offers/mRsziN/comments HTTP/1.1
+POST  http://localhost:3000/api/articles/mRsziN/comments HTTP/1.1
 content-type: application/json
 
 {
