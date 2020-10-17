@@ -1,5 +1,7 @@
+#get categories
+GET  http://localhost:3000/api/category HTTP/1.1
 
-#edit offer
+#edit article
 PUT  http://localhost:3000/api/articles/mRsziN HTTP/1.1
 content-type: application/json
 
@@ -9,7 +11,7 @@ content-type: application/json
 }
 
 ###
-#delete offer
+#delete article
 DELETE  http://localhost:3000/api/articles/mRsziN HTTP/1.1
 
 ###

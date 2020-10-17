@@ -9,7 +9,7 @@ class SearchService {
   findAll(query) {
     const queryString = query.toString();
     const result = this._offers.filter((offer) => {
-      return offer.title.indexOf(queryString) === 0;
+      return offer.title.indexOf(queryString) !== -1;
     });
     return result;
   }
