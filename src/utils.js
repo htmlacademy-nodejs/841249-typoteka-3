@@ -1,4 +1,11 @@
 'use strict';
+const express = require(`express`);
+
+module.exports.createAPI = () => {
+  const app = express();
+  app.use(express.json());
+  return app;
+};
 
 module.exports.getRandomInt = (min, max) => {
   min = Math.ceil(min);
