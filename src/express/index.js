@@ -9,6 +9,7 @@ const categoriesRouter = require(`./routes/categories.js`);
 const searchRouter = require(`./routes/search.js`);
 const postRouter = require(`./routes/post.js`);
 const mock = require(`./mocks.js`);
+const CreateAPI = require(`./api.js`);
 
 const app = express();
 const DEFAULT_PORT = 8080;
@@ -18,9 +19,16 @@ app.set(`views`, templates);
 app.set(`view engine`, `pug`);
 app.use(express.static(publics));
 
+const apiServer = new CreateAPI();
 
-app.get(`/`, (req, res) => {
-  res.render(`main.pug`, mock.main);
+app.get(`/`, async (req, res) => {
+  try {
+    const articles = await apiServer.getArticles();
+    mock.main.articles = articles;
+    res.render(`main.pug`, mock.main);
+  } catch (err) {
+    console.log(err);
+  }
 });
 app.get(`/400`, (req, res) => {
   res.render(`errors/400.pug`);
