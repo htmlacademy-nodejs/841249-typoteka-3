@@ -22,20 +22,20 @@ block content
           img(src='img/sea-fullsize@1x.jpg', alt='пейзаж море, скалы, пляж')
         .post__text
           h3=article.title
-          p=article.text
+          p=article.fullText
     .post__wrapper.post__wrapper--comments
       section.post__comments.comments
         h2.comments__title.title.title--middle Комментарии
         ul.comments__list
-          each val in comments
+          each val in article.comments
             li.comments__comment
               .comments__avatar.avatar
-                img(src=val.avatarSrc, alt='аватар пользователя')
+                img(src='', alt='аватар пользователя')
               .comments__text
                 .comments__head
                   p=val.name
                     | •
-                  time.comments__date(datetime=val.date.data)=val.date.text
+                  time.comments__date(datetime)
                 p.comments__message Автор, ты все выдумал, покайся
         .comments__footer.comments__footer--user
           form(action='#', method='POST')

@@ -29,17 +29,18 @@ myRouter.get(`/`, async (req, res) => {
   }
 });
 myRouter.get(`/comments`, async (req, res) => {
-  let fetchedComments = [];
 
   try {
     const articles = await apiServer.getArticles();
     const articlesIDs = articles.map((artcle) => artcle.id).slice(0, 3);
     const comments = mock.comments;
-    articlesIDs.forEach(async (id) => {
-      const commentsList = await apiServer.getArticleComments(id);
-      fetchedComments = [...fetchedComments, ...commentsList];
-    });
-    comments.commentsList = fetchedComments;
+    const fetchedComments = articlesIDs.map((id) => apiServer.getArticleComments(id));
+    Promise.all(fetchedComments)
+      .then((responces) => {
+        responces.forEach((it) => {
+          comments.commentsList = [...comments.commentsList, ...it];
+        });
+      });
     res.render(`comments.pug`, comments);
   } catch (err) {
     console.log(err);

@@ -16,6 +16,22 @@ articlesRouter.get(`/`, async (req, res) => {
 });
 
 articlesRouter.get(`/add`, (req, res) => res.render(`new-post.pug`));
+articlesRouter.post(`/add`, async (req, res) => {
+  try {
+    const body = req.body;
+    const {title, announce, fullText} = body;
+    const postBody = {
+      title,
+      fullText,
+      announce,
+    };
+    await API.addArticle(postBody);
+    res.redirect(`/my`);
+  } catch (err) {
+    console.log(err);
+  }
+
+});
 articlesRouter.get(`/:id`, (req, res) => res.send(`/articles/:id ${req.params.id}`));
 articlesRouter.get(`/edit/:id`, async (req, res) => {
   const id = req.params.id;
@@ -23,7 +39,7 @@ articlesRouter.get(`/edit/:id`, async (req, res) => {
     const article = await API.getArticleById(id);
     const articleMock = mock.post;
     articleMock.article = article;
-    res.render(`/articles/edit/${id}`);
+    res.render(`post.pug`, articleMock);
   } catch (err) {
     console.log(err);
   }

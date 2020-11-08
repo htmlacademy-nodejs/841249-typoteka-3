@@ -11,16 +11,17 @@ const postRouter = require(`./routes/post.js`);
 const mock = require(`./mocks.js`);
 const CreateAPI = require(`./api.js`);
 
+
 const app = express();
 const DEFAULT_PORT = 8080;
 const templates = path.resolve(__dirname, `./templates`);
 const publics = path.resolve(__dirname, `./public`);
+app.use(express.urlencoded({extended: false}));
 app.set(`views`, templates);
 app.set(`view engine`, `pug`);
 app.use(express.static(publics));
 
 const apiServer = new CreateAPI();
-
 app.get(`/`, async (req, res) => {
   try {
     const articles = await apiServer.getArticles();
