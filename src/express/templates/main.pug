@@ -65,8 +65,8 @@ block content
             li.preview__item.preview__item--noimage
               ul.preview__breadcrumbs
                 li.preview__breadcrumbs-item
-                  a.preview__breadcrumbs-link(href="#") Фриланс
-              time.preview__time(datetime="2019-03-21T20:33") 21.03.2019, 20:33
+                  a.preview__breadcrumbs-link(href="#")=val.category
+              time.preview__time(datetime="2019-03-21T20:33")=val.createdDate
               h3.preview__name
                 a.preview__name-link(href="#")=val.title
               p.preview__text=val.text

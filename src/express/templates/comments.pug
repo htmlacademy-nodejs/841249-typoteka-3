@@ -11,8 +11,8 @@ block content
             publication__header
               img.publication__list-image(src=val.avatarSrc, width='20', height='20', alt='Аватар пользователя')
               b.publication__list-nameval.name
-              time.publication__item-time(datetime=val.date.data)=val.date.text
-            a.publication__item-text(href=val.titleLink.href)=val.titleLink.text
+              time.publication__item-time(datetime)
+            a.publication__item-text(href)=val.text
             p.publication__text-strong=val.text
             button.publication__button.button.button--close-item(type='button')
               span.visually-hidden Закрыть строку списка
@@ -21,8 +21,8 @@ block content
             .publication__header
               img.publication__list-image(src=val.avatarSrc, width='20', height='20', alt='Аватар пользователя')
               b.publication__list-nameval.name
-              time.publication__item-time(datetime=val.date.data)=val.date.text
-            a.publication__item-text(href=val.titleLink.href)=val.titleLink.text
+              time.publication__item-time(datetime)
+            a.publication__item-text(href)=val.text
             p.publication__text-strong=val.text
             button.publication__button.button.button--close-item(type='button')
               span.visually-hidden Закрыть строку списка
