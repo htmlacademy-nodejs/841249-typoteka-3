@@ -14,14 +14,16 @@ CREATE TABLE users
   avatar_path VARCHAR(255) NOT NULL
 );
 
-CREATE UNIQUE INDEX user_unique_ind ON users (email, firstname, lastname);
+CREATE UNIQUE INDEX user_unique_ind ON users (email);
 
 
 CREATE TABLE categories
 (
   id SERIAL PRIMARY KEY,
-  category_name VARCHAR(16) NOT NULL
+  title VARCHAR(16) NOT NULL
 );
+
+CREATE UNIQUE INDEX categories_unique_ind ON categories (title);
 
 CREATE TABLE articles
 (
@@ -53,8 +55,8 @@ CREATE TABLE comments
   id SERIAL PRIMARY KEY,
   user_id INTEGER NOT NULL,
   article_id INTEGER NOT NULL,
-  comment_date DATE NOT NULL,
-  comment_text VARCHAR(1000),
+  created_date DATE NOT NULL,
+  text VARCHAR(1000),
   FOREIGN KEY (user_id) REFERENCES users (id)
 		ON DELETE CASCADE,
   FOREIGN KEY (article_id) REFERENCES articles (id)
